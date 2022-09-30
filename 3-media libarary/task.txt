@@ -1,0 +1,4 @@
+// design page 
+// create folder
+// create file [php,txt,json]
+// put content [<?php echo "x" ?>,glal husseny,{"id":5}]
