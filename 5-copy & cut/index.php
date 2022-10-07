@@ -1,8 +1,8 @@
 <?php 
-
-// copy('data/cut/data.php','data/new-hello.php');
-
-// rename('media/new-user.php','media/cut/data.php');
-
-// rename('images','img');
-
+$path = 'images' . DIRECTORY_SEPARATOR;
+$images = scandir($path);
+array_splice($images,0,2);
+foreach($images AS $index=>$image){
+    $imageExtension = pathinfo($image,PATHINFO_EXTENSION);
+    rename($path.$image,$path.++$index.'.'.$imageExtension);
+}
