@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             <small> Supported Files <b><?= implode(' , ',SUPPORTED_EXTENSIONS) ?> </b> </small>
                     </div>
                     <div class="form-group">
-                        <textarea name="content" id="" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="content" id="" cols="30" rows="3" class="form-control"></textarea>
                     </div>
                     <button class="btn btn-outline-dark" name="create-file"> Create </button>
                 </form>

@@ -1,13 +1,50 @@
-<?php 
-$basePath = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
-$imagesPath = $basePath . '/images/';
-$dataPath = $basePath . '/data/';
-$readDir = __DIR__;
+<?php
+define('SUPPORTED_EXTENSIONS',['php','txt','json']);
+define('STATIC_LEVELS',5);
+// discover files
+$arrayOfDirs = explode('\\',__DIR__);
+$currentDir = end($arrayOfDirs) . DIRECTORY_SEPARATOR;
+
+$basePathForData = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'],1);
+$dataPath = $basePathForData . DIRECTORY_SEPARATOR . $currentDir ;
+
+$dirLevel = count($arrayOfDirs) - STATIC_LEVELS;
+$basePathForImages = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI'],$dirLevel);
+$imagesPath = $basePathForImages . '/images/';
+$readDir = __DIR__ . DIRECTORY_SEPARATOR;
+
+// create file or folder
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if(isset($_POST['create-folder'])){
+        // create folder
+        $newFolder = $readDir  . $_POST['folder'];
+        mkdir($newFolder); // data/songs/index.php
+        copy(__FILE__,$newFolder. DIRECTORY_SEPARATOR . 'index.php');
+        // file_put_contents($readDir  . 'index.php',);
+        $folderMessage =  "<div class='alert alert-success text-center'> {$_POST['folder']} Created Successfully </div>";
+    }
+
+    if(isset($_POST['create-file'])){
+        // create file
+        $fileExtension = pathinfo($_POST['file'])['extension'];
+        $fileName = pathinfo($_POST['file'])['basename'];
+        if(! in_array($fileExtension,SUPPORTED_EXTENSIONS)){
+            $error = "<div class='alert alert-danger text-center'> Unsupported File </div>";
+        }
+        $content = $_POST['content'];
+        if($fileExtension == 'php'){
+            $content = "<?php {$content} ?>";
+        }elseif($fileExtension == 'json'){
+            $content = "{ {$content} }";
+        }
+        file_put_contents($readDir  . $fileName,$content);
+        $fileMessage = "<div class='alert alert-success text-center'> {$fileName} Created Successfully </div>";
+    }
+}
+
+// scan dir
 $readDirFiles = scandir($readDir);
 prepareDir($readDirFiles);
-
-
-
 
 function prepareDir(array &$readDirFiles){
     array_splice($readDirFiles,0,2); // delete . , ..
@@ -54,6 +91,35 @@ function getImage(string $file) :string{
         <div class="row mt-5">
             <div class="col-12 text-center text-dark h1 my-5">
                 <?= basename($readDir) ?>
+            </div>
+            <div class="col-6">
+                <h1 class="text-dark text-center">Create Folder</h1>
+                <?= $folderMessage ?? "" ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="folder">Folder Name</label>
+                        <input type="text" name="folder" id="folder" class="form-control" placeholder=""
+                            aria-describedby="helpId">
+                    </div>
+                    <button class="btn btn-outline-dark" name="create-folder"> Create </button>
+                </form>
+            </div>
+            <div class="col-6">
+                <h1 class="text-dark text-center">Create File</h1>
+                <?= $error ?? "" ?>
+                <?= $fileMessage ?? "" ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="folder">File Name</label>
+                        <input type="text" name="file" id="folder" class="form-control" placeholder="example.txt"
+                            aria-describedby="helpId">
+                        <small> Supported Files <b><?= implode(' , ',SUPPORTED_EXTENSIONS) ?> </b> </small>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="content" id="" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-outline-dark" name="create-file"> Create </button>
+                </form>
             </div>
             <?php foreach($readDirFiles AS $file): ?>
             <div class="col-2">
