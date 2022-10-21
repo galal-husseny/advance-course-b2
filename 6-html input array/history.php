@@ -1,12 +1,5 @@
 <?php 
-$historyFile = 'data'.DIRECTORY_SEPARATOR.'history.json';
-if(! file_exists($historyFile)){
-    file_put_contents($historyFile,json_encode($_POST['members']));
-}else{
-    $history = json_decode(file_get_contents($historyFile));
-    $newdata = array_merge($history,$_POST['members']);
-    file_put_contents($historyFile,json_encode($newdata));
-}
+$data = json_decode(file_get_contents('data'.DIRECTORY_SEPARATOR.'history.json'));
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,11 +28,11 @@ if(! file_exists($historyFile)){
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($_POST['members'] AS $member): ?>
+                            <?php foreach($data AS $member): ?>
                                 <tr>
-                                    <td> <?= $member['name'] ?></td>
-                                    <td> <?= $member['gender'] ?? "" ?></td>
-                                    <td> <?= implode(' , ',$member['fruits'] ?? []) ?></td>
+                                    <td> <?= $member->name ?></td>
+                                    <td> <?= $member->gender ?? "" ?></td>
+                                    <td> <?= implode(' , ',$member->fruits ?? []) ?></td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>

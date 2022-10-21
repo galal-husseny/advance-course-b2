@@ -1,0 +1,29 @@
+[{
+    "name": "Galal Husseny",
+    "gender": "male",
+    "fruits": ["apple", "banana", "strawberry"]
+}, {
+    "name": "Esraa Husseny",
+    "gender": "female",
+    "fruits": ["apple", "strawberry"]
+}, {
+    "name": "MohamedHusseny",
+    "gender": "male",
+    "fruits": ["banana"]
+}, {
+    "name": "may",
+    "gender": "female",
+    "fruits": ["apple", "banana", "strawberry"]
+}, {
+    "name": "ehdaa ",
+    "gender": "female",
+    "fruits": ["apple", "strawberry"]
+}, {
+    "name": "nada",
+    "gender": "female",
+    "fruits": ["banana"]
+}, {
+    "name": "sawsan",
+    "gender": "female",
+    "fruits": ["apple", "banana", "strawberry"]
+}]
