@@ -11,8 +11,8 @@ class transcation {
         $userWallet = new userWallet(100);
         // DIP =>
         //  high level modules should not depend on low level modules
-        // both shold depend on abstraction 
-        //abstraction should not depend on details (concrete classes)
+        // both should depend on abstraction 
+        // abstraction should not depend on details (concrete classes) (high level modules)
         // details (concrete class) should depend on abstraction
         $balance = $userWallet->getBalance();
         $history = $this->showHistory($userWallet);

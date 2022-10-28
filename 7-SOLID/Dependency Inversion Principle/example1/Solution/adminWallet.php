@@ -1,12 +1,12 @@
 <?php
 // low level module
-class userWallet {
+class adminWallet implements Wallet {
     public $balance;
-    public $user_id;
+    public $admin_id;
 
-    public function __construct($user_id)
+    public function __construct($admin_id)
     {
-        $this->user_id = $user_id;
+        $this->admin_id = $admin_id;
     }
 
     public function getBalance()

@@ -1,6 +1,6 @@
 <?php
 // low level module
-class userWallet {
+class userWallet implements Wallet {
     public $balance;
     public $user_id;
 

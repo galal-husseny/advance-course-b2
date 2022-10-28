@@ -1,12 +1,12 @@
 <?php
 // low level module
-class userWallet {
+class supplierWallet implements Wallet {
     public $balance;
-    public $user_id;
+    public $supplier_id;
 
-    public function __construct($user_id)
+    public function __construct($supplier_id)
     {
-        $this->user_id = $user_id;
+        $this->supplier_id = $supplier_id;
     }
 
     public function getBalance()

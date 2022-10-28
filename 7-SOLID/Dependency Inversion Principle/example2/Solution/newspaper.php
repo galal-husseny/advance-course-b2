@@ -1,8 +1,8 @@
 <?php
 // low level
 
-class newspaper {
-    public function getStroy()
+class newspaper extends story{
+    public function getStory()
     {
         return "stroy from newspaper";
     }

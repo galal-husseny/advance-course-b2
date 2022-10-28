@@ -12,6 +12,7 @@ class square extends rect {
         $this->width = $length;
         $this->length = $length;
     }
+    
 }
 
 // rect => w , l
