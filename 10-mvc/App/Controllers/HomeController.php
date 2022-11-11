@@ -4,6 +4,6 @@ namespace App\Controllers;
 class HomeController {
     public function index()
     {
-        echo "home";
+        // return view('dashboard.index',['x'=>'y']);
     }
 }
