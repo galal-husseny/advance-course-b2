@@ -42,11 +42,11 @@ class Route {
         }
 
         if(! $findRoute){
-            // abort(404);
+            abort(404);
         }
 
         if($is405){
-            // abort(405);
+            abort(405);
         }
     }
 

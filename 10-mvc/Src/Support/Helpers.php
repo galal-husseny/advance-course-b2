@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Src\Application;
+use Src\Resources\View;
 
 if(! function_exists('url_slash_handle')){
     function url_slash_handle(string &$url) { // local
@@ -10,7 +13,7 @@ if(! function_exists('url_slash_handle')){
 }
 
 if(! function_exists('path_slash_handle')){
-    function path_slash_handle(string &$path) { // local
+    function path_slash_handle(?string &$path) { // local
         if(! str_starts_with($path,ds())){
             $url = str_replace('/',ds(),ds() . $path);
         }
@@ -42,3 +45,50 @@ if(! function_exists('resource_path')){
     }
 }
 
+if(! function_exists('resource_component_path')){
+    function resource_component_path($path = null) :string{
+        return __DIR__ . ds() . '..' . ds() . '..' . ds() . 'Resources' . ds() . 'Components' . path_slash_handle($path);
+    }
+}
+
+if(! function_exists('resource_error_path')){
+    function resource_error_path($path = null) :string{
+        return __DIR__ . ds() . '..' . ds() . '..' . ds() . 'Resources' . ds() . 'Errors' . path_slash_handle($path);
+    }
+}
+
+if(! function_exists('resource_view_path')){
+    function resource_view_path($path = null) :string{
+        return __DIR__ . ds() . '..' . ds() . '..' . ds() . 'Resources' . ds() . 'Views' . path_slash_handle($path);
+    }
+}
+
+if(! function_exists('resource_layout_path')){
+    function resource_layout_path($path = null) :string{
+        return __DIR__ . ds() . '..' . ds() . '..' . ds() . 'Resources' . ds() . 'Layouts' . path_slash_handle($path);
+    }
+}
+
+if(! function_exists('view')){
+    function view(string $view ,array $data = []) {
+        View::make($view,$data);
+    }
+}
+
+if(! function_exists('abort')){
+    function abort(int|string $statusCode) {
+        View::makeError($statusCode);
+    }
+}
+
+if(! function_exists('env')){
+    function env($key,$default = null) {
+        return $_ENV[$key] ?? $default;
+    }
+}
+
+if(! function_exists('app')){
+    function app() {
+        return new Application;
+    }
+}
