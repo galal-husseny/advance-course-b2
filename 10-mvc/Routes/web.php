@@ -7,15 +7,15 @@ use App\Controllers\LoginController;
 
 
 
-Route::get('/profile',function(){
-    echo "profile";
+Route::get('/',function(){
+    echo "hello";
 });
 
 Route::get('home',[HomeController::class,'index']);
 
 Route::post('login',[LoginController::class,'login']);
 
-Route::get('register','App\Controllers\LoginController@register');
+Route::get('register/{id}/{username}','App\Controllers\LoginController@register');
 
-
+'register/1/abdo';
 // x

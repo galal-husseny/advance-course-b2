@@ -21,7 +21,7 @@ class Route {
     public function resolve()
     {
         $method = $this->request->method();
-        $url = $this->request->url();
+        $url = $this->request->url(); // register/1/abdo
         $data = $this->request->all();
         $action = self::$routes[ $method ][ $url ] ?? null;
         $this->errorHandler($url,$method);
