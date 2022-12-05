@@ -17,5 +17,3 @@ Route::post('login',[LoginController::class,'login']);
 
 Route::get('register/{id}/{username}','App\Controllers\LoginController@register');
 
-'register/1/abdo';
-// x

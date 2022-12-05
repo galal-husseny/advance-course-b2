@@ -24,5 +24,3 @@ class transcation {
     }
 }
 
-// $transaction = new transcation;
-// $transaction->showTransaction();

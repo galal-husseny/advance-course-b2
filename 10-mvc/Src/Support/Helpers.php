@@ -89,6 +89,11 @@ if(! function_exists('env')){
 
 if(! function_exists('app')){
     function app() {
-        return new Application;
+        static $instance = null;
+        if(! $instance){
+            $instance = new Application; 
+            echo "ok";
+        }
+        return $instance;
     }
 }
