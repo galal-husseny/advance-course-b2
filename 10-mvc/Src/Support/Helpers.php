@@ -2,6 +2,7 @@
 
 use Src\Application;
 use Src\Resources\View;
+use Src\Support\Inflect;
 
 if(! function_exists('url_slash_handle')){
     function url_slash_handle(string &$url) { // local
@@ -95,5 +96,13 @@ if(! function_exists('app')){
             echo "ok";
         }
         return $instance;
+    }
+}
+
+if(! function_exists('class_basename')){
+    function class_basename(string $namespace){
+        $namespace = str_replace('\\','/',$namespace);
+        $basename = strtolower(basename($namespace));
+        return Inflect::pluralize($basename);
     }
 }
